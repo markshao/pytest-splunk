@@ -23,7 +23,7 @@ setup(
     description='A simple plugin to use with Pytest',
     long_description=read('README.rst'),
     py_modules=['pytest_pysplunk'],
-    install_requires=['pytest>=2.8.1'],
+    install_requires=['pytest>=2.8.1', "requests>=2.9.1"],
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
