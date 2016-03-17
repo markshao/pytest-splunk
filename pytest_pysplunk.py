@@ -1,25 +1,35 @@
 # -*- coding: utf-8 -*-
 
-import pytest
+import requests
+import json
+
+HTTPINPUT = "/services/collector/event"
+REPORTPROTOCOL = {
+    "total_test_case_number": 0,
+}
 
 
 def pytest_addoption(parser):
     group = parser.getgroup('splunk')
     group._addoption(
-        "--bcservice", dest="bcservice", metavar="battle cat service uri",
+        "--splunkuri", dest="splunkuri", metavar="splunk http input service uri",
         action="store",
         help=""
     )
     group._addoption(
-        "--bctoken", dest="bctoken", metavar="battle cat token", action="store",
+        "--splunktoken", dest="splunktoken", metavar="splunk http input security token", action="store",
         help=""
     )
 
 
 def pytest_configure(config):
-    pass
+    if not config.pluginmanager.hasplugin("splunk"):
+        config.pluginmanager.register(SplunkPlugin(config))
 
 
 class SplunkPlugin(object):
-    def __init__(self):
+    def __init__(self, config):
+        self.config = config
+
+    def pytest_terminal_summary(self, terminalreporter):
         pass
